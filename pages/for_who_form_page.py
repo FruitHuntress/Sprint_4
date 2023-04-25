@@ -1,12 +1,11 @@
 from selenium.webdriver.common.keys import Keys
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
-import time
 
 
 class LocatorOrderForms:
-    order_button_top = [By.XPATH, "//body/div[@id='root']/div[1]/div[1]/div[1]/div[2]/button[1]"]
-    order_button_bottom = [By.XPATH, "//body/div[@id='root']/div[1]/div[1]/div[4]/div[2]/div[5]/button[1]"]
+    order_button_top = [By.XPATH, ".//div[@class='Header_Nav__AGCXC']/button[contains(text(), 'Заказать')]"]
+    order_button_bottom = [By.XPATH, ".//div[@class='Home_FinishButton__1_cWm']/button[contains(text(), 'Заказать')]"]
     name = [By.XPATH, ".//input[@placeholder='* Имя']"]
     surname = [By.XPATH, ".//input[@placeholder='* Фамилия']"]
     address = [By.XPATH, ".//input[@placeholder='* Адрес: куда привезти заказ']"]
@@ -54,17 +53,7 @@ class ForWhoFormPage(BasePage):
         next_button = self.find_element(LocatorOrderForms.next_button, time=3)
         next_button.click()
 
-    def confirm_order(self):
-        yes_button = self.find_element(LocatorOrderForms.yes_button, time=3)
-        yes_button.click()
 
-        placed_order_window_title = self.find_element(LocatorOrderForms.placed_order_window_title, time=3)
-        return placed_order_window_title.text
-
-    def scroll_down(self, driver):
-        order_button_bottom = self.find_element(LocatorOrderForms.order_button_bottom, time=3)
-        driver.execute_script("arguments[0].scrollIntoView();", order_button_bottom)
-        time.sleep(0.2)
 
 
 

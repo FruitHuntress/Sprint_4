@@ -1,21 +1,19 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
-import time
 
 
 class LocatorRentInfoFormPage:
-    order_button_top = [By.XPATH, "//body/div[@id='root']/div[1]/div[1]/div[1]/div[2]/button[1]"]
-    order_button_bottom = [By.XPATH, "//body/div[@id='root']/div[1]/div[1]/div[4]/div[2]/div[5]/button[1]"]
+    order_button_top = [By.XPATH, ".//div[@class='Header_Nav__AGCXC']/button[contains(text(), 'Заказать')]"]
+    order_button_bottom = [By.XPATH, ".//div[@class='Home_FinishButton__1_cWm']/button[contains(text(), 'Заказать')]"]
 
-    date = [By.XPATH, "//body/div[@id='root']/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/input[1]"]
+    date = [By.XPATH, ".//input[@placeholder='* Когда привезти самокат']"]
     rental_time_field = [By.XPATH, ".//div[@class='Dropdown-control']"]
-    calendar_button = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[2]/div[5]/div[1]"]
+    calendar_button = [By.XPATH, ".//div[@class='react-datepicker__week']/div[@aria-label='Choose понедельник, 24-е апреля 2023 г.']"]
     rental_time_button = [By.XPATH, "//div[contains(text(),'двое суток')]"]
-    order_button_final = [By.XPATH, "//body/div[@id='root']/div[1]/div[2]/div[3]/button[2]"]
-    yes_button = [By.XPATH, "/html/body/div[1]/div/div[2]/div[5]/div[2]/button[2]"]
-    placed_order_window_title = [By.XPATH, "/html/body/div[1]/div/div[2]/div[5]/div[1]"]
-    order_status_button = [By.XPATH, "/html/body/div[1]/div/div[2]/div[5]/div[2]/button"]
-
+    order_button_final = [By.XPATH, ".//div[@class='Order_Buttons__1xGrp']/button[contains(text(), 'Заказать')]"]
+    yes_button = [By.XPATH, ".//div[@class='Order_Buttons__1xGrp']/button[contains(text(), 'Да')]"]
+    placed_order_window_title = [By.XPATH, ".//div[@class='Order_Modal__YZ-d3']/div[contains(text(), 'Заказ оформлен')]"]
+    order_status_button = [By.XPATH, "//button[contains(text(),'Посмотреть статус')]"]
 
 
 class RentInfoFormPage(BasePage):
@@ -40,15 +38,9 @@ class RentInfoFormPage(BasePage):
         placed_order_window_title = self.find_element(LocatorRentInfoFormPage.placed_order_window_title, time=3)
         return placed_order_window_title.text
 
-    def scroll_down(self, driver):
-        order_button_bottom = self.find_element(LocatorRentInfoFormPage.order_button_bottom, time=3)
-        driver.execute_script("arguments[0].scrollIntoView();", order_button_bottom)
-        time.sleep(0.2)
-
     def click_order_status_button(self):
         order_status_button = self.find_element(LocatorRentInfoFormPage.order_status_button, time=3)
         order_status_button.click()
-        time.sleep(5)
 
 
 
